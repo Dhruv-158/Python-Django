@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+{% block  title  %} contect {% endblock title %}
+
+{% block body  %}
+
+  <div class="a_sec_d1">
+    <div class="a_sec_d2" style="background-image: url(../static/img/header.jpg);">
+        <div class="a_sec_d3">
+            <div class="a_sec_d4">
+                <h2 class="d4_h2">Contact</h2>
+                <p class="">
+                <ul class="d4_ul" class="flex p-0 text-lg font-medium">
+                    <li class="d4_ul_li1" ><a href="/" class="li1_a1" >Home</a></li>
+                    <li class="d4_ul_li2" >&#x2022;</li>
+                    <li class="d4_ul_li3" ><a href="/contect" class="li1_a2" >Contact</a></li>
+                </ul>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container my-5 position-relative">
+    <h3 class="text-center" style="position: relative; z-index: 1;" >Contact US</h3>
+    
+    <form method="post" action="./contect"  style="width: 26rem; margin: 0 auto; ">
+        {% csrf_token %}
+        <div data-mdb-input-init class="form-outline mb-4">
+            <label class="form-label" for="Name">name</label>
+            <input type="text" name="name" placeholder="Enter a Name " id="name" class="form-control" />
+        </div>
+        
+        <div data-mdb-input-init class="form-outline mb-4">
+            <label class="form-label" for="email">Email address</label>
+            <input type="email" id="email" name="email" placeholder="Enter a Email Address" class="form-control" />
+        </div>
+        
+        <div data-mdb-input-init class="form-outline mb-4">
+            <label class="form-label" for="phone">Phone No</label>
+            <input type="TEXT" id="phone" name="phone" class="form-control" placeholder="Enter a Phone number" />
+        </div>
+
+        <div data-mdb-input-init class="form-outline mb-4">
+            <label class="form-label" for="message">Message</label>
+            <textarea class="form-control" id="message" name="message" rows="4"></textarea>
+        </div>
+        
+        <div class="form-check d-flex justify-content-center mb-4">
+            <input
+                class="form-check-input me-2"
+                type="checkbox"
+                value=""
+                id="form4Example4"
+                checked
+            />
+            <label class="form-check-label" for="form4Example4">
+                Send me a copy of this message
+            </label>
+        </div>
+        
+        <button data-mdb-ripple-init type="submit" class="btn btn-primary btn-block mb-4">Submit</button>
+    </form>
+</div>
+
+{% endblock body %} 

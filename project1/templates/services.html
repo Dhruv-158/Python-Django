@@ -1,0 +1,75 @@
+{% extends "base.html" %} {% block title %}Services{% endblock title %}
+ {% block body %}
+
+ <div class="a_sec_d1">
+  <div class="a_sec_d2" style="background-image: url(../static/img/header.jpg);">
+      <div class="a_sec_d3">
+          <div class="a_sec_d4">
+              <h2 class="d4_h2">Blog</h2>
+              <p class="">
+              <ul class="d4_ul" class="flex p-0 text-lg font-medium">
+                  <li class="d4_ul_li1" ><a href="/" class="li1_a1" >Home</a></li>
+                  <li class="d4_ul_li2" >&#x2022;</li>
+                  <li class="d4_ul_li3" ><a href="/services" class="li1_a2" >Blog</a></li>
+              </ul>
+              </p>
+          </div>
+      </div>
+  </div>
+</div>
+
+
+<div class="container px-5">
+  <div class="row my-5 row-cols-1 row-cols-md-3 g-4">
+    {% for i in serviceData %}
+    <div class="col">
+      <div class="card h-100 shadow-sm">
+        <img src="{{i.service_img}}" class="card-img-top" alt="Service Image" style="object-fit: cover; height:200px;">
+        <div class="card-body">
+          <h5 class="card-title"><b>{{ i.service_title }}</b></h5>
+          <p class="card-text">{{ i.service_info }}</p>
+          <a href="{{ i.service_link }}" class="btn btn-primary">More..</a>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+
+
+
+     <!-- <div class="col">
+      <div class="card shadow-sm">
+        <img src="../static/img/service-2.svg" class="img-fluid" alt="..."
+          style="object-fit: contain; object-position: center" />
+        <div class="card-body">
+          <p class="card-text">
+            This is a wider card with supporting text below as a natural lead-in
+            to additional content. This content is a little bit longer.
+          </p>
+          <div class="d-flex justify-content-between align-items-center">
+            <small class="text-body-secondary"><a href="">More ..</a></small>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col">
+      <div class="card shadow-sm">
+        <img src="../static/img/service-2.svg" class="img-fluid" alt="..."
+          style="object-fit: contain; object-position: center" />
+        <div class="card-body">
+          <p class="card-text">
+            This is a wider card with supporting text below as a natural lead-in
+            to additional content. This content is a little bit longer.
+          </p>
+          <div class="d-flex justify-content-between align-items-center">
+            <small class="text-body-secondary"><a href="">More ..</a></small>
+          </div>
+        </div>
+      </div>
+    </div> -->
+  </div>
+</div> 
+
+{% endblock body %}

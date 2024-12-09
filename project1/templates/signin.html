@@ -1,0 +1,100 @@
+
+{% extends "base.html" %}
+{% block  title  %}Sign-in
+{% endblock title %}
+
+{% block body  %}
+
+<section class="text-center">
+    <!-- Background image -->
+    <div class="p-5 bg-image" style="
+          background-image: url('../static/img/carousel-2.jpg');
+          height: 300px;
+          "></div>
+    <!-- Background image -->
+  
+    <div class="card mx-4 mx-md-5 shadow-5-strong bg-body-tertiary" style="
+          margin-top: -100px;
+          backdrop-filter: blur(30px);
+          ">
+      <div class="card-body py-5 px-md-5">
+  
+        <div class="row d-flex justify-content-center">
+          <div class="col-lg-8">
+            <h2 class="fw-bold mb-5">Sign up now</h2>
+            
+            <form method="post" action="">
+              {% csrf_token %}
+              {% comment %} {{form.as_p}} {% endcomment %}
+              
+              <!-- 2 column grid layout with text inputs for the first and last names -->
+              <div class="row">
+                <!-- <div class="col-md-6 mb-4">
+                  <div data-mdb-input-init class="form-outline">
+                    <label class="form-label" for="firstname">First name</label>
+                    <input type="text" id="firstname" name="firstname" class="form-control" />
+                  </div>
+                </div>
+                <div class="col-md-6 mb-4">
+                  <div data-mdb-input-init class="form-outline">
+                    <label class="form-label" for="lastname">Last name</label>
+                    <input type="text" id="lastname" name="lastname" class="form-control" />
+                  </div>
+                </div>
+              </div>  -->
+              
+                 <!-- Username input -->
+                  <div data-mdb-input-init class="form-outline mb-4">
+                  <label class="form-label" for="username">Username</label>
+                   <input type="text" id="username" name="username" class="form-control" /> 
+                  {% comment %} {{form.username}}  {% endcomment %}
+                  {{form.username.errors}}
+                </div> 
+
+              <!-- Email input -->
+              <div data-mdb-input-init class="form-outline mb-4">
+                <label class="form-label" for="email">Email address</label>
+                 <input type="email" id="email" name="email" class="form-control" /> 
+                {% comment %} {{form.email}}  {% endcomment %}
+                {{form.email.errors}}
+              </div>
+  
+              <!-- Password input -->
+              <div data-mdb-input-init class="form-outline mb-4">
+                <label class="form-label" for="password">Password</label>
+                <input type="password1" id="password1" name="password1" class="form-control" /> 
+                {% comment %} {{form.password1}}  {% endcomment %}
+                {{form.password1.errors}}
+              </div>
+              
+              <div data-mdb-input-init class="form-outline mb-4">
+                <label class="form-label" for="password">Conform Password</label>
+                 <input type="password2" id="password2" name="password2" class="form-control" /> 
+                {% comment %} {{form.password2}}  {% endcomment %}
+                {{form.password2.errors}}
+              </div>
+
+              <!-- Checkbox 
+              <div class="form-check d-flex justify-content-center mb-4">
+                <input class="form-check-input me-2" type="checkbox" value="" id="check" checked />
+                <label class="form-check-label" for="check">
+                  Subscribe to our newsletter
+                </label>
+              </div>-->
+  
+              <!-- Submit button -->
+
+              <button data-mdb-button-init data-mdb-ripple-init class="btn btn-primary btn-lg btn-block">Sign in</button>
+              <hr>
+              <a href="{% url 'login'  %}" data-mdb-button-init data-mdb-ripple-init class="btn btn-primary btn-block mb-4">
+                Go for login
+              </a>
+
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  {% endblock body %} 

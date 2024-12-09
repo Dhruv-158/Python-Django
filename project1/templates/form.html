@@ -1,0 +1,14 @@
+
+{% block body  %}
+
+<form action="" method="post">
+    {% csrf_token %}
+    <label for="">value1 :- </label>
+    <input type="text" name="value1" id="" class="form-control">
+    <label for="">value2 :- </label>
+    <input type="text" name="value2" id="" class="form-control">
+    <button type="submit">Save</button>
+    <input type="text" value="{{op}}" name="" id="">
+</form>
+
+{% endblock body %} 

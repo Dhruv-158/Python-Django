@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block title %} News {% endblock title %}
+
+{% block body %}
+
+  <section class="Con_sec">
+    <div class="main_div">
+      <div class="title_div">
+      <h1>Welcome</h1>
+      <hr/>
+    </div>
+
+    <div class="Contain">
+        <span class="img_s">
+          <img class="img_P" src="{{ news.news_img }}" height="200px" width="200px" alt="{{ news.news_title }}" />
+        </span>
+        <span class="Con_s">
+        <h2 class="Con_div_title my-5">
+            {{ news.news_title }}
+        </h2>
+        <p class="Con_div_Pra">
+          {{ news.news_desc|safe }}
+        </p>
+      </span>
+    </div>
+      </div>
+    </section>
+{% endblock body %}
+

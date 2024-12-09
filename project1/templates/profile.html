@@ -1,0 +1,11 @@
+
+{% extends "base.html" %}
+{% block  title  %}Profile{% endblock title %}
+
+{% block body  %}
+<section style="height: 70vh; display:grid; place-items:center;" >
+<h1>Welcome, {{ user.username }}!</h1>
+
+<a href="{% url 'logout' %}" class="btn btn-danger">Log Out</a>
+</section>
+{% endblock body %}
