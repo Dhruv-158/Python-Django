@@ -1,0 +1,135 @@
+{% extends 'base.html' %} {% block content %} {% load cart %} {% load
+custom_filter %}
+
+<style>
+
+
+  .mt-build {
+    width: 100vw;
+    height: 70vh;
+    display: grid;
+    place-items: center;
+    
+  }
+
+  .container-fluid {
+    background-color: #333;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+  }
+
+  .border {
+    background-color: #333;
+    color: #6e9ecd;
+    border: 1px solid #444455;
+  }
+
+  .display-4 {
+    color: #6e9ecd;
+    font-weight: bold;
+  }
+
+  .table {
+    color: #ffffff;
+    background-color: #2c2c3c;
+    border-collapse: collapse;
+  }
+
+  .table th {
+    background-color: #444455;
+    color: #ffffff;
+    text-align: center;
+    padding: 12px;
+  }
+
+  .table td {
+    text-align: center;
+    padding: 12px;
+    border: 1px solid #444455;
+  }
+
+  .table tr:nth-child(even) {
+    background-color: #3a3a4a;
+  }
+
+  .table img {
+    border: 2px solid #555577;
+  }
+
+  .badge-success {
+    background-color: #4caf50;
+    color: #ffffff;
+    padding: 5px 10px;
+    border-radius: 10px;
+    font-size: 0.9rem;
+  }
+
+  .badge-warning {
+    background-color: #ffc107;
+    color: #333346;
+    padding: 5px 10px;
+    border-radius: 10px;
+    font-size: 0.9rem;
+  }
+
+  hr {
+    border: 1px solid #555577;
+  }
+
+  .rounded {
+    border-radius: 10px;
+  }
+
+  p {
+    margin-bottom: 0;
+  }
+</style>
+
+<div class="container-fluid mt-build">
+  <div class="border rounded p-4 m-4">
+    <p class="display-4 pl-4 ml-4">Your Orders</p>
+    <hr />
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Sno.</th>
+          <th>Image</th>
+          <th>Product</th>
+          <th>Date</th>
+          <th>Price</th>
+          <th>Quantity</th>
+          <th>Total</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for order in orders %}
+        <tr>
+          <td>{{forloop.counter}}</td>
+          <td>
+            <img
+              style="height: 80px"
+              class="rounded-circle"
+              src="{{order.product.image.url}}"
+              alt=""
+            />
+          </td>
+          <td>{{order.product.name}}</td>
+          <td>{{order.date}}</td>
+          <td>{{order.price}}</td>
+          <td>{{order.quantity}}</td>
+          {% comment %} <td>{{order.quantity|multiply:order.price}}</td> {% endcomment %}
+          {% if order.status %}
+          <td><small class="badge badge-success">Completed</small></td>
+          {%else%}
+          <td><small class="badge badge-warning">Pending</small></td>
+          {% endif %}
+        </tr>
+
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+
+{% endblock %}

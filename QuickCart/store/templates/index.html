@@ -1,0 +1,200 @@
+{% extends 'base.html' %} {% block content %} {% load cart %} {% load
+custom_filter %}
+
+<style>
+  @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap");
+
+  .mt-custom {
+    margin-top: 5rem;
+  }
+
+  .list-group {
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+
+  .list-group-item {
+    background-color: #fff;
+    border: none;
+    color: #333;
+    font-weight: 500;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+
+  .list-group-item:hover,
+  .list-group-item:focus {
+    background-color: #252829;
+    color: #fff;
+  }
+
+  /* CardBox Styling */
+  .cardBox {
+    width: 280px;
+    height: 400px;
+    position: relative;
+    display: inline-block;
+    margin: 20px;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+    background: linear-gradient(145deg, #ffffff, #f0f0f0);
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  }
+
+  .cardBox:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.25);
+  }
+
+  /* Card Content */
+  .card {
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border-radius: 20px;
+    background: white;
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+
+  .card img {
+    width: 70%;
+    height: 60%;
+    margin: 0 auto;
+    border-radius: 10px;
+  }
+
+  .card .content {
+    padding: 10px;
+    opacity: 0;
+    transform: translateY(50px);
+    transition: all 0.3s ease-in-out;
+  }
+
+  .card:hover .content {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .card-title {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #252829;
+  }
+
+  .card-text {
+    font-size: 1rem;
+    color: #252829;
+    font-weight: bold;
+  }
+
+  /* Card Footer */
+  .card-footer {
+    background: none;
+    padding: 0;
+    border-top: none;
+  }
+
+  .card-footer form {
+    margin: 0 auto;
+  }
+
+  .btn {
+    font-weight: 600;
+    text-transform: uppercase;
+  }
+
+  /* Responsive Grid */
+  .container-fluid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+  }
+</style>
+
+
+<div class="container-fluid mt-custom">
+  <div class="row">
+
+    <div class="col-lg-3 mx-auto">
+      <div class="list-group">
+        <a href="/" class="list-group-item">All Products</a>
+        {% for category in categories %}
+        <a href="/?category={{ category.id }}" class="list-group-item"
+          >{{ category.name }}</a
+        >
+        {% endfor %}
+      </div>
+    </div>
+
+    <div id="products" class="col-lg-9 mx-auto">
+      {% for product in products %}
+      <div class="cardBox">
+        <div class="card" id="{{ product.id }}">
+          <img
+            class="card-img-top"
+            src="{{ product.image.url }}"
+            alt="{{ product.name }}"
+          />
+          <div class="content">
+            <p class="card-title">{{ product.name }}</p>
+            <p class="card-text">{{ product.price}}</p>
+          </div>
+
+          <div class="card-footer">
+            {% if product|is_in_cart:request.session.cart %}
+            <div class="row no-gutters">
+              <form action="/#{{ product.id }}" class="col-2" method="post">
+                {% csrf_token %}
+                <input
+                  hidden
+                  type="text"
+                  name="product"
+                  value="{{ product.id }}"
+                />
+                <input hidden type="text" name="remove" value="True" />
+                <input type="submit" value=" - " class="btn btn-light" />
+              </form>
+              <div class="col text-center">
+                {{ product|cart_quantity:request.session.cart }} in Cart
+              </div>
+              <form action="/#{{ product.id }}" class="col-2" method="post">
+                {% csrf_token %}
+                <input
+                  hidden
+                  type="text"
+                  name="product"
+                  value="{{ product.id }}"
+                />
+                <input type="submit" value=" + " class="btn btn-light" />
+              </form>
+            </div>
+            {% else %}
+            <form action="/#{{ product.id }}" method="POST">
+              {% csrf_token %}
+              <input
+                hidden
+                type="text"
+                name="product"
+                value="{{ product.id }}"
+              />
+              <input
+                type="submit"
+                class="btn btn-dark w-100"
+                value="Add To Cart"
+              />
+            </form>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+{% endblock %}

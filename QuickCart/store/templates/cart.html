@@ -1,0 +1,217 @@
+{% extends 'base.html' %} {% block content %} {% load cart %} {% load
+custom_filter %}
+
+<style>
+  
+  .mt-div {
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 20px;
+    overflow: auto;
+  }
+
+  .container-fluid {
+    background-color: #333;
+    border-radius: 15px;
+    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+  }
+
+  /* Header Text */
+  .display-4 {
+    height: 25%;
+    font-size: 2rem;
+    font-weight: bold;
+    color: #6e9ecd;
+  }
+
+  /* Table Style */
+  .table {
+    width: 100%;
+    text-align: center;
+    border-collapse: collapse;
+    margin-top: 10px;
+    color: #ffffff;
+  }
+
+  .table th {
+    background-color: #2c3e50;
+    color: #ffffff;
+    padding: 15px;
+    text-transform: uppercase;
+  }
+
+  .table td {
+    padding: 15px;
+    border-bottom: 1px solid #e0e0e0;
+  }
+
+  .table img {
+    height: 80px;
+    width: 80px;
+    border-radius: 50%;
+    border: 2px solid #ddd;
+  }
+
+  .table tfoot th {
+    font-size: 1.2rem;
+    color: #fff;
+  }
+
+  /* Buttons */
+  .btn-outline-info {
+    background: linear-gradient(45deg, #1abc9c, #16a085);
+    color: #fff;
+    border: none;
+    transition: transform 0.2s ease-in-out, background-color 0.3s ease-in-out;
+  }
+
+  .btn-outline-info:hover {
+    background: linear-gradient(45deg, #16a085, #1abc9c);
+    transform: scale(1.05);
+    color: #fff;
+  }
+
+  /* Modal Styling */
+  .modal-content {
+    border-radius: 15px;
+    background-color: #ffffff;
+    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
+  }
+
+  .modal-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #fff;
+  }
+
+  .modal-body {
+    padding: 20px;
+  }
+
+  .form-control {
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 10px;
+  }
+
+  .form-control:focus {
+    border-color: #1abc9c;
+    box-shadow: 0px 0px 5px rgba(26, 188, 156, 0.5);
+  }
+
+  .btn-submit {
+    background: #1abc9c;
+    color: white;
+    border-radius: 10px;
+    padding: 10px 20px;
+    border: none;
+    transition: all 0.3s ease;
+  }
+
+  .btn-submit:hover {
+    background: #16a085;
+    transform: translateY(-2px);
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+  }
+</style>
+
+<div class="container-fluid mt-div">
+  <div class="border rounded p-4">
+    <p class="display-4">Your Cart</p>
+    <hr />
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Sno.</th>
+          <th>Image</th>
+          <th>Product</th>
+          <th>Price</th>
+          <th>Quantity</th>
+          <th>Total</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for product in products %}
+        <tr>
+          <td>{{ forloop.counter }}</td>
+          <td><img src="{{ product.image.url }}" alt="" /></td>
+          <td>{{ product.name }}</td>
+          <td>${{ product.price }}</td>
+          <td>{{ product|cart_quantity:request.session.cart }}</td>
+          <td>${{ product|price_total:request.session.cart }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+      <tfoot>
+        <tr>
+          <th colspan="4"></th>
+          <th>Total</th>
+          <th>${{ products|total_cart_price:request.session.cart }}</th>
+        </tr>
+      </tfoot>
+    </table>
+    <hr />
+    <div class="m-3 p-3 text-right">
+      <button
+        data-toggle="modal"
+        data-target="#exampleModal"
+        class="btn btn-outline-info col-lg-3"
+      >
+        Check Out
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div
+  class="modal fade"
+  id="exampleModal"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Check Out Form</h5>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form action="/check-out" method="POST">
+          {% csrf_token %}
+          <div class="form-group">
+            <label for="address">Address</label>
+            <input
+              type="text"
+              name="address"
+              class="form-control"
+              id="address"
+            />
+          </div>
+          <div class="form-group">
+            <label for="phone">Phone</label>
+            <input type="text" name="phone" class="form-control" id="phone" />
+          </div>
+          <input
+            type="submit"
+            class="btn-submit float-right"
+            value="Check Out"
+          />
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

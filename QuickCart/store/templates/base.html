@@ -1,0 +1,358 @@
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <!-- CSS only -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi"
+      crossorigin="anonymous"
+    />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+      crossorigin="anonymous"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Playfair+Display&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Montserrat&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Poppins&display=swap"
+      rel="stylesheet"
+    />
+    <title>Shopping Cart</title>
+    <style>
+      *{
+        margin:0px;
+        padding:0px;
+        box-sizing: border-box;
+      }
+
+      html{
+        height: 100%;
+        width: 100%;
+      }
+
+      .nav {
+        height: 50px;
+        width: 100%;
+        background-color: #252829;
+        position:fixed;
+        z-index: 9999;
+        top: 0;
+
+    }
+    .nav>.nav-header {
+        display: inline;
+    }
+    
+    .nav>.nav-header>.nav-title {
+        display: inline-block;
+        font-size: 22px;
+        color: #fff;
+        padding: 10px;
+    }
+    
+    .nav>.nav-btn {
+        display: none;
+    }
+    
+    .nav>.nav-links {
+        text-align: center;
+        font-size: 18px;
+    }
+    
+    .nav>.nav-links>a {
+        display: inline-block;
+        padding: 13px 10px;
+        text-decoration: none;
+        color: #efefef;
+    }
+    
+    .nav>.nav-links>a:hover {
+        background-color: rgba(0, 0, 0, 0.3);
+    }
+    
+    .nav>#nav-check {
+        display: none;
+    }
+    
+    @media (max-width: 800px) {
+        .nav>.nav-btn {
+            display: inline-block;
+            position: absolute;
+            right: 0;
+            top: 0;
+        }
+    
+        .nav>.nav-btn>label {
+            display: inline-block;
+            width: 50px;
+            height: 50px;
+            padding: 13px;
+        }
+    
+        .nav>.nav-btn>label:hover,
+        .nav>#nav-check:checked~.nav-btn>label {
+            background-color: rgba(0, 0, 0, 0.3);
+        }
+    
+        .nav>.nav-btn>label>span {
+            display: block;
+            width: 25px;
+            height: 2px;
+            background-color: #eee;
+            margin: 5px 0;
+        }
+    
+        .nav>.nav-links {
+            position: absolute;
+            display: block;
+            width: 100%;
+            background-color: #333;
+            height:0px;
+            transition: all 0.3s ease-in;
+            overflow-y: hidden;
+            top: 50px;
+            left: 0;
+        }
+    
+        .nav>.nav-links>a {
+            display: block;
+            width: 100%;
+        }
+    
+        .nav>#nav-check:not(:checked)~.nav-links {
+            height: 0;
+        }
+    
+        .nav>#nav-check:checked~.nav-links {
+            height: calc(100vh - 540px);
+            
+        }
+    }
+      /*---------------------------------------
+   Social section
+-----------------------------------------*/
+      .footer {
+        background-color: black;
+        color: #fefefe;
+        width: 100%;
+      }
+      
+      .footer .heading {
+        
+        color: #fefefe;
+        max-width: 1010px;
+        width: 90%;
+        text-transform: uppercase;
+        margin: 0 auto;
+        margin-bottom: 3rem;
+        font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+        padding:1rem;
+      }
+      
+      .footer .content {
+        display: flex;
+        justify-content: space-evenly;
+        margin: 1.5rem;
+        text-align: center;
+      }
+      
+      .footer .content p {
+        margin-bottom: 1.3rem;
+      }
+      
+      .footer .content a {
+        text-decoration: none;
+        color: #fefefe;
+      }
+      
+      .footer .content a:hover {
+        border-bottom: 1px solid #971717;
+      }
+      
+      .footer .content h4 {
+        margin-bottom: 1.3rem;
+        font-size: 19px;
+      }
+      
+      footer {
+        margin-bottom: 2rem;
+      }
+      
+      footer hr {
+        margin: 2rem 0;
+      }
+
+      .copydiv{
+        padding: 1%;
+      }
+      
+      @media (max-width: 767px) {
+
+        .footer .content {
+          display: flex;
+          flex-direction: column;
+          font-size: 14px;
+        }
+      
+        .footer {
+          position: unset;
+          text-align: center;
+        }
+      }
+      
+      @media (min-width: 768px) and (max-width: 1024px) {
+        .footer .content,
+        .footer {
+          font-size: 14px;
+        }
+      }
+      
+      @media (orientation: landscape) and (max-height: 500px) {
+        .footer {
+          position: unset;
+        }
+      }
+    </style>
+  </head>
+  <body style="background-color: #333;">
+    
+    <!-- Nav Bar -->
+
+    <nav class="nav">
+      <input type="checkbox" id="nav-check" />
+      <div class="nav-header">
+        <div class="nav-title">ITS</div>
+      </div>
+      <div class="nav-btn">
+        <label for="nav-check">
+          <span></span>
+          <span></span>
+          <span></span>
+        </label>
+      </div>
+
+      <div class="nav-links">
+        <a href="/" target="_self">Home</a>
+        <a href="/cart" target="_self">
+          Cart
+          {% if request.session.customer %}
+          <span class="badge">{{ request.session.cart.keys|length }}</span>
+          {% endif %}
+        </a>
+        <a href="/" target="_self">Contact Us</a>
+        {% if request.session.customer %}
+        <a href="/orders" target="_self">Orders</a>
+        <a href="/logout" target="_self">Logout</a>
+        {% else %}
+        <a href="/signup" target="_self">Signup</a>
+        <a href="/login" target="_self">Login</a>
+        {% endif %}
+      </div>
+    </nav>
+    {%block content%} {%endblock%}
+    <footer>
+      <div class="footer">
+        <div class="heading">
+          <h2>ITS<sup>™</sup></h2>
+        </div>
+        <div class="content">
+          <div class="services">
+            <h4>Services</h4>
+            <p><a href="#">App development</a></p>
+            <p><a href="#">Web development</a></p>
+            <p><a href="#">DevOps</a></p>
+            <p><a href="#">Web designing</a></p>
+          </div>
+          <div class="social-media">
+            <h4>Social</h4>
+            <p>
+              <a href="#"
+                ><i class="fab fa-linkedin"></i> Linkedin</a
+              >
+            </p>
+            <p>
+              <a href="#"
+                ><i class="fab fa-twitter"></i> Twitter</a
+              >
+            </p>
+            <p>
+              <a href="/"
+                ><i class="fab fa-github"></i> Github</a
+              >
+            </p>
+            <p>
+              <a href="/"
+                ><i class="fab fa-facebook"></i> Facebook</a
+              >
+            </p>
+            <p>
+              <a href="/"
+                ><i class="fab fa-instagram"></i> Instagram</a
+              >
+            </p>
+          </div>
+          <div class="links">
+            <h4>Quick links</h4>
+            <p><a href="#">Home</a></p>
+            <p><a href="#">About</a></p>
+            <p><a href="#">Blogs</a></p>
+            <p><a href="#">Contact</a></p>
+          </div>
+          <div class="details">
+            <h4 class="address">Address</h4>
+            <p>
+              Lorem ipsum dolor sit amet consectetur <br />
+              adipisicing elit. Cupiditate, qui!
+            </p>
+            <h4 class="mobile">Mobile</h4>
+            <p><a href="#">+91-**********</a></p>
+            <h4 class="mail">Email</h4>
+            <p><a href="#">sdjkfjddsdj@gmail.com</a></p>
+          </div>
+        </div>
+        <div class="copydiv">
+          <hr />
+          © 2022 codewithME.
+        </div>
+    </footer>
+
+    <script
+      src="https://kit.fontawesome.com/66aa7c98b3.js"
+      crossorigin="anonymous"
+    ></script>
+
+    <script
+      src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+      integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+      integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+      integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>

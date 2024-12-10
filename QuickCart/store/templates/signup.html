@@ -1,0 +1,182 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<style>
+  /* General Styles */
+  body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #74ebd5, #acb6e5);
+      color: #333;
+      margin: 0;
+      padding: 0;
+  }
+
+  .container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+  }
+
+  /* Form Card */
+  .signup-card {
+      background-color: #ffffff;
+      border-radius: 15px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+      padding: 30px;
+      width: 400px;
+      animation: fadeIn 1s ease-out;
+  }
+
+  .signup-card img {
+      display: block;
+      margin: 0 auto 20px;
+      height: 150px;
+      transition: transform 0.3s ease;
+  }
+
+  .signup-card img:hover {
+      transform: scale(1.1);
+  }
+
+  .signup-card h3 {
+      text-align: center;
+      font-weight: bold;
+      margin-bottom: 15px;
+      color: #2c3e50;
+  }
+
+  /* Form Styles */
+  .form-group {
+      margin-bottom: 15px;
+  }
+
+  .form-group label {
+      font-weight: 600;
+      color: #555;
+  }
+
+  .form-control {
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      padding: 10px;
+      font-size: 14px;
+      transition: all 0.3s ease;
+  }
+
+  .form-control:focus {
+      border-color: #74ebd5;
+      box-shadow: 0px 4px 10px rgba(116, 235, 213, 0.3);
+  }
+
+  /* Button */
+  .btn-info {
+      background: linear-gradient(45deg, #74ebd5, #acb6e5);
+      border: none;
+      border-radius: 8px;
+      color: #fff;
+      padding: 10px 15px;
+      font-weight: bold;
+      text-transform: uppercase;
+      transition: background 0.3s ease, transform 0.3s ease;
+      width: 100%;
+  }
+
+  .btn-info:hover {
+      background: linear-gradient(45deg, #acb6e5, #74ebd5);
+      transform: translateY(-2px);
+  }
+
+  /* Error Message */
+  .alert-danger {
+      background-color: #f8d7da;
+      color: #721c24;
+      border: 1px solid #f5c6cb;
+      border-radius: 8px;
+      padding: 10px;
+      margin-bottom: 20px;
+      text-align: center;
+  }
+
+  /* Animations */
+  @keyframes fadeIn {
+      from {
+          opacity: 0;
+          transform: translateY(20px);
+      }
+      to {
+          opacity: 1;
+          transform: translateY(0);
+      }
+  }
+</style>
+
+<div class="container">
+    <div class="signup-card">
+        <img 
+            src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c8/Shopping_cart_with_food_clip_art_2.svg/307px-Shopping_cart_with_food_clip_art_2.svg.png" 
+            alt="Signup Illustration"
+        >
+        <h3>Create An Account</h3>
+        {% if error %}
+        <div class="alert alert-danger" role="alert">
+            {{ error }}
+        </div>
+        {% endif %}
+        <form action="/signup" method="POST">
+            {% csrf_token %}
+
+            <!-- First Name -->
+            <div class="form-group">
+                <label for="firstname">First Name</label>
+                <input type="text" name="firstname" 
+                       value="{{ values.first_name }}" 
+                       class="form-control" 
+                       placeholder="Enter your first name">
+            </div>
+
+            <!-- Last Name -->
+            <div class="form-group">
+                <label for="lastname">Last Name</label>
+                <input type="text" name="lastname" 
+                       value="{{ values.last_name }}" 
+                       class="form-control" 
+                       placeholder="Enter your last name">
+            </div>
+
+            <!-- Phone -->
+            <div class="form-group">
+                <label for="phone">Phone</label>
+                <input type="text" name="phone" 
+                       value="{{ values.phone }}" 
+                       class="form-control" 
+                       placeholder="Enter your phone number">
+            </div>
+
+            <!-- Email -->
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" name="email" 
+                       value="{{ values.email }}" 
+                       class="form-control" 
+                       placeholder="Enter your email">
+            </div>
+
+            <!-- Password -->
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" name="password" 
+                       class="form-control" 
+                       placeholder="Enter your password">
+            </div>
+
+            <!-- Submit Button -->
+            <div class="form-group">
+                <input class="btn btn-info" type="submit" value="Create An Account">
+            </div>
+        </form>
+    </div>
+</div>
+
+{% endblock %}
